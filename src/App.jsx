@@ -39,22 +39,24 @@ function App() {
 
   const handleRemoveData = (key) => {
     setTitle('Loading...')
+    const tmpArr = [...todo];
     setTimeout(()=> {
+      document.getElementById(`li-${key.toString()}`).style.opacity = 0;
+      document.getElementById(`li-${key.toString()}`).style.height = 0;
       setTitle('Done!')
     } , 500)
     setTimeout(()=> {
-      setTitle(title)
-    } , 800)
-    const tmpArr = [...todo];
-    setTodo(tmpArr.filter((val,index) => index != key))
+      setTitle(defaultTitle)
+      setTodo(tmpArr.filter((val,index) => index != key))
+    } , 2000)
   }
   const handleModifyData = (key) => {
     setTitle('Loading...')
     setTimeout(()=> {
       setTitle('Done!')
-    } , 500)
+    } , 200)
     setTimeout(()=> {
-      setTitle(title)
+      setTitle(defaultTitle)
     } , 800)
     const tmpArr = [...todo];
     tmpArr[key].completed = true;
@@ -73,27 +75,27 @@ function App() {
                         <section className='h-[80%] relative flex'>              
                               
 
-                                  <ul id='ulList' className='flex flex-col w-full gap-6 pr-10 max-h-full overflow-auto'>
+                                  <ul id='ulList' className='flex flex-col w-full pr-10 max-h-full overflow-auto'>
 
                                     
                                     { todo.map((item,index) => {
                                       if (!item.completed) {
 
                                         return (
-                                        <li className='w-full flex flex-row h-[6.2vh] items-center' key={item.id} id={`li-${item.id}`}>
-                                        <p className='w-[70%] text-xl font-bold drop-shadow-md'>{item.todo}</p> 
-                                        <button id='buttonModify' className='w-[15%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>+</button>
-                                        <button id='buttonRemove' className='w-[15%] h-full bg-red-500' onClick={() => handleRemoveData(index)}>Del</button>
+                                        <li className='w-full flex flex-row h-[6.2vh] p-1 items-center' key={item.id} id={`li-${index.toString()}`}>
+                                        <p className='w-[80%] text-xl font-bold drop-shadow-md'>{item.todo}</p> 
+                                        <button id='buttonModify' className='w-[10%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>+</button>
+                                        <button id='buttonRemove' className='w-[10%] h-full bg-red-500' onClick={() => handleRemoveData(index)}>Del</button>
                                         </li>
                                         )
 
                                       } else {
 
                                         return (
-                                          <li className='w-full flex flex-row h-[6.2vh] items-center justify-end redLabel' key={item.id} id={`li-${item.id}`}>
-                                          <p className='w-[60%] text-xl font-bold drop-shadow-md redLabelText'>{item.todo} is Done !</p> 
-                                          {/* <button id='buttonModify' className='w-[15%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>+</button> */}
-                                          <button id='redLabelButton' className='w-[15%] h-full bg-red-500 redLabelButton' onClick={() => handleRemoveData(index)}>Delete Now!</button>
+                                          <li className='w-full flex flex-row h-[6.2vh] p-1 items-center justify-end redLabel' key={item.id} id={`li-${index.toString()}`}>
+                                          <p className='w-[80%] text-xl font-bold drop-shadow-md redLabelText'>{item.todo} is Done !</p> 
+                                          <button id='buttonModifyRed' className='w-0 h-0 bg-blue-500' onClick={() => handleModifyData(index)}></button>
+                                          <button id='redLabelButton' className='w-[20%] h-full bg-red-500 redLabelButton' onClick={() => handleRemoveData(index)}>Delete Now!</button>
                                           </li>
                                           )
                                       }

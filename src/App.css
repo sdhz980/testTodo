@@ -9,6 +9,7 @@ background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e
 }
 
 .redLabel {
+  transition: all .8s;
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(255, 0, 0, 0.3) 20%);
   border-radius: 0 13px 13px 0;
@@ -19,6 +20,10 @@ background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e
   background-color: rgba(255, 0, 0, 0.4);
   border-radius: 0 13px 13px 0;
   backdrop-filter: blur(3px);
+}
+
+#buttonModifyRed {
+  display: none;
 }
 
 #containerTodoList {
