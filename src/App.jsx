@@ -10,8 +10,9 @@ function App() {
 
 
   useEffect(() => {
+    setTitle('Loading Fetching Data...')
     getData().then((res) => {
-      console.log(res);
+      setTitle(title);
       setTodo(res);
     })
   } , [])
