@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = "https://dummyjson.com/todos?limit=3"
+const url = `https://dummyjson.com/todos?limit=${Math.floor(Math.random() * 30)}`;
 
 export const getData = async()=>{
     const data = await axios.get(url);

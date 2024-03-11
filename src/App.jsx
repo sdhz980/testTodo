@@ -83,9 +83,9 @@ function App() {
 
                                         return (
                                         <li className='w-full flex flex-row h-[6.2vh] p-1 items-center' key={item.id} id={`li-${index.toString()}`}>
-                                        <p className='w-[80%] text-xl font-bold drop-shadow-md'>{item.todo}</p> 
-                                        <button id='buttonModify' className='w-[10%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>+</button>
-                                        <button id='buttonRemove' className='w-[10%] h-full bg-red-500' onClick={() => handleRemoveData(index)}>Del</button>
+                                        <p className='w-[80%] text-x font-bold drop-shadow-md'>{item.todo}</p> 
+                                        <button id='buttonModify' className='w-[10%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>Done Task</button>
+                                        <button id='buttonRemove' className='w-[10%] h-full bg-red-500' onClick={() => handleRemoveData(index)}>Remove</button>
                                         </li>
                                         )
 
@@ -93,9 +93,9 @@ function App() {
 
                                         return (
                                           <li className='w-full flex flex-row h-[6.2vh] p-1 items-center justify-end redLabel' key={item.id} id={`li-${index.toString()}`}>
-                                          <p className='w-[80%] text-xl font-bold drop-shadow-md redLabelText'>{item.todo} is Done !</p> 
+                                          <p className='w-[80%] text-x font-bold drop-shadow-md redLabelText'>{item.todo} is Done !</p> 
                                           <button id='buttonModifyRed' className='w-0 h-0 bg-blue-500' onClick={() => handleModifyData(index)}></button>
-                                          <button id='redLabelButton' className='w-[20%] h-full bg-red-500 redLabelButton' onClick={() => handleRemoveData(index)}>Delete Now!</button>
+                                          <button id='redLabelButton' className='w-[20%] h-full bg-red-500 redLabelButton' onClick={() => handleRemoveData(index)}>Remove Now!</button>
                                           </li>
                                           )
                                       }
