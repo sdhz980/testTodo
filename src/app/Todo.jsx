@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const url = "http://localhost:3000/todo/"
+const url = "https://dummyjson.com/todos?limit=3"
 
 export const getData = async()=>{
     const data = await axios.get(url);
-    return data;
+    return data.data.todos;
 }
 
 export const addData = async(inputData)=> {

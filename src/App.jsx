@@ -11,35 +11,53 @@ function App() {
 
   useEffect(() => {
     getData().then((res) => {
-      setTodo(res.data);
+      console.log(res);
+      setTodo(res);
     })
-  } , [todo])
+  } , [])
 
-  function handleApi (callBack , extraCallback = setTitle('ok')) {
-    setTitle('loading')
-    callBack.then(res => {
-      extraCallback
-      setTimeout(() => {setTitle(defaultTitle)} , 200)
-    });
+  // function handleApi (callBack) {
+  //   setTitle('loading');
+    
+  //   callBack;
 
-    getData().then((res) => {
-      setTodo(res.data);
-    })
+  //   getData().then((res) => {
+  //     setTodo(res);
+  //   })
 
-  }
+  // }
 
   const handleAddData = () => {
-    handleApi(addData({
-      "task": input,
-      "isDone": false
-    }) , setInput(''));
+    setTodo([...todo , {"completed": false,
+      "id": Math.floor(Math.random()*(999-100+1)+100) ,
+      "todo": input,
+      "userId": 26}
+    ])
+    setInput('');
   }
 
   const handleRemoveData = (key) => {
-    handleApi(removeData(key));
+    setTitle('Loading...')
+    setTimeout(()=> {
+      setTitle('Done!')
+    } , 500)
+    setTimeout(()=> {
+      setTitle(title)
+    } , 800)
+    const tmpArr = [...todo];
+    setTodo(tmpArr.filter((val,index) => index != key))
   }
-  const handleModifyData = (key , newData) => {
-    handleApi(modifyData(key,newData));
+  const handleModifyData = (key) => {
+    setTitle('Loading...')
+    setTimeout(()=> {
+      setTitle('Done!')
+    } , 500)
+    setTimeout(()=> {
+      setTitle(title)
+    } , 800)
+    const tmpArr = [...todo];
+    tmpArr[key].completed = true;
+    setTodo(tmpArr)
   }
 
   return (
@@ -51,20 +69,20 @@ function App() {
 
 
 
-                        <section className='h-[80%] flex'>              
+                        <section className='h-[80%] relative flex'>              
                               
 
-                                  <ul id='ulList' className='flex flex-col w-full gap-6 mr-10'>
+                                  <ul id='ulList' className='flex flex-col w-full gap-6 pr-10 max-h-full overflow-auto'>
 
                                     
-                                    { todo.map((item) => {
-                                      if (!item.isDone) {
+                                    { todo.map((item,index) => {
+                                      if (!item.completed) {
 
                                         return (
                                         <li className='w-full flex flex-row h-[6.2vh] items-center' key={item.id} id={`li-${item.id}`}>
-                                        <p className='w-[70%] text-xl font-bold drop-shadow-md'>{item.task}</p> 
-                                        <button id='buttonModify' className='w-[15%] h-full bg-blue-500' onClick={() => handleModifyData(item.id , {isDone : true})}>+</button>
-                                        <button id='buttonRemove' className='w-[15%] h-full bg-red-500' onClick={() => handleRemoveData(item.id)}>Del</button>
+                                        <p className='w-[70%] text-xl font-bold drop-shadow-md'>{item.todo}</p> 
+                                        <button id='buttonModify' className='w-[15%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>+</button>
+                                        <button id='buttonRemove' className='w-[15%] h-full bg-red-500' onClick={() => handleRemoveData(index)}>Del</button>
                                         </li>
                                         )
 
@@ -72,9 +90,9 @@ function App() {
 
                                         return (
                                           <li className='w-full flex flex-row h-[6.2vh] items-center justify-end redLabel' key={item.id} id={`li-${item.id}`}>
-                                          <p className='w-[48%] text-xl font-bold drop-shadow-md redLabelText'>{item.task} is Done !</p> 
-                                          {/* <button id='buttonModify' className='w-[15%] h-full bg-blue-500' onClick={() => handleModifyData(item.id , {isDone : true})}>+</button> */}
-                                          <button id='redLabelButton' className='w-[15%] h-full bg-red-500 redLabelButton' onClick={() => handleRemoveData(item.id)}>Delete Now!</button>
+                                          <p className='w-[60%] text-xl font-bold drop-shadow-md redLabelText'>{item.todo} is Done !</p> 
+                                          {/* <button id='buttonModify' className='w-[15%] h-full bg-blue-500' onClick={() => handleModifyData(index)}>+</button> */}
+                                          <button id='redLabelButton' className='w-[15%] h-full bg-red-500 redLabelButton' onClick={() => handleRemoveData(index)}>Delete Now!</button>
                                           </li>
                                           )
                                       }
